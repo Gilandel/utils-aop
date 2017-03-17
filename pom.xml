@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.landel</groupId>
+		<artifactId>utils</artifactId>
+		<version>1.0.4</version>
+	</parent>
+
+	<groupId>fr.landel.utils</groupId>
+	<artifactId>utils-aop</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	
+	<name>utils-aop</name>
+	<description>AOP utils (exception, abstract class for logging and profiling)</description>
+
+	<scm>
+		<url>https://github.com/Gilandel/${project.artifactId}.git</url>
+		<connection>scm:git:git://github.com/Gilandel/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:git@github.com:Gilandel/${project.artifactId}.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	
+	<issueManagement>
+		<system>Github</system>
+		<url>http://github.com/Gilandel/${project.artifactId}/issues</url>
+	</issueManagement>
+	
+	<ciManagement>
+		<system>Travis</system>
+		<url>https://travis-ci.org/Gilandel/${project.artifactId}</url>
+	</ciManagement>
+	
+	<properties>
+		<gpg.home>${env.HOME}/build/Gilandel/${project.artifactId}/distribution</gpg.home>
+		
+		<!-- Dependencies version -->
+		<utils-commons.version>1.0.1</utils-commons.version>
+		<utils-io.version>1.0.0</utils-io.version>
+		<utils-microbenchmark.version>1.0.2</utils-microbenchmark.version>
+	</properties>
+	
+	<build>
+		<plugins>
+			<!-- Add license header and generate third-party text file -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-licenses-header-and-third-party</id>
+						<goals>
+							<goal>update-file-header</goal>
+							<goal>add-third-party</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>fr.landel.utils</groupId>
+			<artifactId>utils-commons</artifactId>
+			<version>${utils-commons.version}</version>
+		</dependency>
+
+		<!-- Unit testing -->
+		<dependency>
+			<groupId>fr.landel.utils</groupId>
+			<artifactId>utils-io</artifactId>
+			<version>${utils-io.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<!-- Spring AOP -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+	</dependencies>
+</project>
