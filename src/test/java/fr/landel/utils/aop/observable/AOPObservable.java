@@ -111,16 +111,22 @@ public class AOPObservable {
      * @param p2
      *            String array
      * @param p3
-     *            List of string
+     *            String array
      * @param p4
-     *            Iterator of string
+     *            List of string
      * @param p5
-     *            Map
+     *            List of string
      * @param p6
+     *            Iterator of string
+     * @param p7
+     *            Map
+     * @param p8
+     *            Map
+     * @param p9
      *            Map
      */
-    public void test(final String[] p1, final String[] p2, final List<String> p3, final Iterator<String> p4, final Map<String, String> p5,
-            final Map<String, String> p6) {
+    public void test(final String[] p1, final String[] p2, final String[] p3, final List<String> p4, final List<String> p5,
+            final Iterator<String> p6, final Map<String, String> p7, final Map<String, String> p8, final Map<String, String> p9) {
         // Observable method, array, list and map
     }
 

@@ -219,13 +219,15 @@ public abstract class AbstractAspect {
             logEntry.append(objects[loop]).append(EnumChar.COMMA).append(EnumChar.SPACE);
         }
 
-        final String replacement;
-        if (loop >= MAX_MULTIPLES_LOG) {
-            replacement = EnumChar.ELLIPSIS.toString();
-        } else {
-            replacement = "";
+        if (objects.length > 0) {
+            final String replacement;
+            if (loop >= MAX_MULTIPLES_LOG) {
+                replacement = EnumChar.ELLIPSIS.toString();
+            } else {
+                replacement = "";
+            }
+            logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
         }
-        logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
         logEntry.append(EnumChar.BRACKET_RIGHT);
     }
 
@@ -257,14 +259,16 @@ public abstract class AbstractAspect {
                 logEntry.append(obj).append(EnumChar.COMMA).append(EnumChar.SPACE);
                 loop++;
             }
+
+            final String replacement;
+            if (!iterator.hasNext()) {
+                replacement = "";
+            } else {
+                replacement = EnumChar.ELLIPSIS.toString();
+            }
+            logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
         }
-        final String replacement;
-        if (!iterator.hasNext()) {
-            replacement = "";
-        } else {
-            replacement = EnumChar.ELLIPSIS.toString();
-        }
-        logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
+
         logEntry.append(EnumChar.BRACKET_RIGHT);
     }
 
@@ -295,7 +299,9 @@ public abstract class AbstractAspect {
             }
         }
 
-        logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
+        if (!map.isEmpty()) {
+            logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
+        }
         logEntry.append(EnumChar.BRACKET_RIGHT);
     }
 

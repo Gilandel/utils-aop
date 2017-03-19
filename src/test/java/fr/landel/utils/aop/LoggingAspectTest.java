@@ -163,10 +163,13 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
         final String expectedLog = EXPECTED_TEXT
                 + "((String[])[p1],"
                 + " (String[])[p2_0, p2_1, p2_2, p2_3, p2_4, p2_5, p2_6, p2_7, p2_8, p2_9…],"
-                + " (ArrayList)[p3],"
-                + " (Itr)[p4_0, p4_1, p4_2, p4_3, p4_4, p4_5, p4_6, p4_7, p4_8, p4_9…],"
-                + " (HashMap)[key=p5],"
-                + " (TreeMap)[key01=1, key02=2, key03=3, key04=4, key05=5, key06=6, key07=7, key08=8, key09=9, key10=10…])";
+                + " (String[])[],"
+                + " (ArrayList)[p4],"
+                + " (ArrayList)[],"
+                + " (Itr)[p6_0, p6_1, p6_2, p6_3, p6_4, p6_5, p6_6, p6_7, p6_8, p6_9…],"
+                + " (HashMap)[key=p7],"
+                + " (TreeMap)[key01=1, key02=2, key03=3, key04=4, key05=5, key06=6, key07=7, key08=8, key09=9, key10=10…],"
+                + " (HashMap)[])";
         // @formatter:on
 
         AOPObservable target = new AOPObservable();
@@ -193,35 +196,38 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
         p2[8] = "p2_8";
         p2[9] = "p2_9";
         p2[10] = "p2_10";
-        List<String> p3 = new ArrayList<>();
-        p3.add("p3");
+        String[] p3 = new String[0];
         List<String> p4 = new ArrayList<>();
-        p4.add("p4_0");
-        p4.add("p4_1");
-        p4.add("p4_2");
-        p4.add("p4_3");
-        p4.add("p4_4");
-        p4.add("p4_5");
-        p4.add("p4_6");
-        p4.add("p4_7");
-        p4.add("p4_8");
-        p4.add("p4_9");
-        p4.add("p4_10");
-        Map<String, String> p5 = new HashMap<>();
-        p5.put("key", "p5");
-        Map<String, String> p6 = new TreeMap<>();
-        p6.put("key01", "1");
-        p6.put("key02", "2");
-        p6.put("key03", "3");
-        p6.put("key04", "4");
-        p6.put("key05", "5");
-        p6.put("key06", "6");
-        p6.put("key07", "7");
-        p6.put("key08", "8");
-        p6.put("key09", "9");
-        p6.put("key10", "10");
-        p6.put("key11", "11");
-        proxy.test(p1, p2, p3, p4.iterator(), p5, p6);
+        p4.add("p4");
+        List<String> p5 = new ArrayList<>();
+        List<String> p6 = new ArrayList<>();
+        p6.add("p6_0");
+        p6.add("p6_1");
+        p6.add("p6_2");
+        p6.add("p6_3");
+        p6.add("p6_4");
+        p6.add("p6_5");
+        p6.add("p6_6");
+        p6.add("p6_7");
+        p6.add("p6_8");
+        p6.add("p6_9");
+        p6.add("p6_10");
+        Map<String, String> p7 = new HashMap<>();
+        p7.put("key", "p7");
+        Map<String, String> p8 = new TreeMap<>();
+        p8.put("key01", "1");
+        p8.put("key02", "2");
+        p8.put("key03", "3");
+        p8.put("key04", "4");
+        p8.put("key05", "5");
+        p8.put("key06", "6");
+        p8.put("key07", "7");
+        p8.put("key08", "8");
+        p8.put("key09", "9");
+        p8.put("key10", "10");
+        p8.put("key11", "11");
+        Map<String, String> p9 = new HashMap<>();
+        proxy.test(p1, p2, p3, p4, p5, p6.iterator(), p7, p8, p9);
 
         try {
             String outputLog = this.stream.toString(EncodingUtils.ENCODING_UTF_8);
