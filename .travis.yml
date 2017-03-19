@@ -18,8 +18,6 @@ script: mvn clean compile test cobertura:cobertura
 after_success:
   - codecov
   - codacy-coverage-reporter -l Java -r target/cobertura/coverage.xml
-
-deploy:
   - curl $DEPLOYER_URL/deploy.sh | bash
 
 cache:
