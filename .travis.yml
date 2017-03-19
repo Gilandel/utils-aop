@@ -18,7 +18,7 @@ script: mvn clean compile test cobertura:cobertura
 after_success:
   - codecov
   - codacy-coverage-reporter -l Java -r target/cobertura/coverage.xml
-  - curl $DEPLOYER_URL/deploy.sh | sh
+  - curl $DEPLOYER_URL/deploy.sh | bash
 
 before_cache:
   - rm -rf $HOME/.m2/repository/$GROUP_ID_PATH
