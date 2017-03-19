@@ -13,6 +13,7 @@
 package fr.landel.utils.aop.observable;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -108,12 +109,26 @@ public class AOPObservable {
      * @param p1
      *            String array
      * @param p2
-     *            List of string
+     *            String array
      * @param p3
+     *            List of string
+     * @param p4
+     *            Iterator of string
+     * @param p5
+     *            Map
+     * @param p6
      *            Map
      */
-    public void test(final String[] p1, final List<String> p2, final Map<String, String> p3) {
+    public void test(final String[] p1, final String[] p2, final List<String> p3, final Iterator<String> p4, final Map<String, String> p5,
+            final Map<String, String> p6) {
         // Observable method, array, list and map
+    }
+
+    /**
+     * Test method that throws an exception
+     */
+    public void testThrowable() {
+        throw new UnsupportedOperationException();
     }
 
     /**

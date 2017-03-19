@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
@@ -158,7 +159,15 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
      */
     @Test
     public void logTest3Complex() {
-        final String expectedLog = EXPECTED_TEXT + "((String[])[p1], (ArrayList)[p2], (HashMap)[key=p3])";
+        // @formatter:off
+        final String expectedLog = EXPECTED_TEXT
+                + "((String[])[p1],"
+                + " (String[])[p2_0, p2_1, p2_2, p2_3, p2_4, p2_5, p2_6, p2_7, p2_8, p2_9…],"
+                + " (ArrayList)[p3],"
+                + " (Itr)[p4_0, p4_1, p4_2, p4_3, p4_4, p4_5, p4_6, p4_7, p4_8, p4_9…],"
+                + " (HashMap)[key=p5],"
+                + " (TreeMap)[key01=1, key02=2, key03=3, key04=4, key05=5, key06=6, key07=7, key08=8, key09=9, key10=10…])";
+        // @formatter:on
 
         AOPObservable target = new AOPObservable();
 
@@ -172,11 +181,47 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
 
         String[] p1 = new String[1];
         p1[0] = "p1";
-        List<String> p2 = new ArrayList<String>();
-        p2.add("p2");
-        Map<String, String> p3 = new HashMap<>();
-        p3.put("key", "p3");
-        proxy.test(p1, p2, p3);
+        String[] p2 = new String[11];
+        p2[0] = "p2_0";
+        p2[1] = "p2_1";
+        p2[2] = "p2_2";
+        p2[3] = "p2_3";
+        p2[4] = "p2_4";
+        p2[5] = "p2_5";
+        p2[6] = "p2_6";
+        p2[7] = "p2_7";
+        p2[8] = "p2_8";
+        p2[9] = "p2_9";
+        p2[10] = "p2_10";
+        List<String> p3 = new ArrayList<>();
+        p3.add("p3");
+        List<String> p4 = new ArrayList<>();
+        p4.add("p4_0");
+        p4.add("p4_1");
+        p4.add("p4_2");
+        p4.add("p4_3");
+        p4.add("p4_4");
+        p4.add("p4_5");
+        p4.add("p4_6");
+        p4.add("p4_7");
+        p4.add("p4_8");
+        p4.add("p4_9");
+        p4.add("p4_10");
+        Map<String, String> p5 = new HashMap<>();
+        p5.put("key", "p5");
+        Map<String, String> p6 = new TreeMap<>();
+        p6.put("key01", "1");
+        p6.put("key02", "2");
+        p6.put("key03", "3");
+        p6.put("key04", "4");
+        p6.put("key05", "5");
+        p6.put("key06", "6");
+        p6.put("key07", "7");
+        p6.put("key08", "8");
+        p6.put("key09", "9");
+        p6.put("key10", "10");
+        p6.put("key11", "11");
+        proxy.test(p1, p2, p3, p4.iterator(), p5, p6);
 
         try {
             String outputLog = this.stream.toString(EncodingUtils.ENCODING_UTF_8);
@@ -370,5 +415,26 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
         } catch (IOException e) {
             fail("Errors occurred in AspectTest#logTestNull()\n" + e);
         }
+    }
+
+    /**
+     * Check AOP with throwable exception (JoinPoint)
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void logTestThrowable() {
+        AOPObservable target = new AOPObservable();
+
+        AspectJProxyFactory factory = new AspectJProxyFactory(target);
+        LoggingAspect aspect = new LoggingAspect();
+
+        assertNotNull(aspect.getLogger());
+
+        factory.addAspect(aspect);
+
+        AOPObservable proxy = factory.getProxy();
+
+        this.stream.reset();
+
+        proxy.testThrowable();
     }
 }

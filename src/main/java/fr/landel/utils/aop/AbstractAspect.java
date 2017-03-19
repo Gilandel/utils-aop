@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import fr.landel.utils.aop.exception.AOPException;
+import fr.landel.utils.commons.ArrayUtils;
 import fr.landel.utils.commons.DateUtils;
 import fr.landel.utils.commons.EnumChar;
 
@@ -98,7 +99,7 @@ public abstract class AbstractAspect {
         signBuilder.append(EnumChar.DOT);
         signBuilder.append(joinPoint.getSignature().getName());
         signBuilder.append(EnumChar.PARENTHESIS_LEFT);
-        if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
+        if (ArrayUtils.isNotEmpty(joinPoint.getArgs())) {
             for (int i = 0; i < joinPoint.getArgs().length; i++) {
                 final Object object = joinPoint.getArgs()[i];
                 if (object == null) {
@@ -218,11 +219,13 @@ public abstract class AbstractAspect {
             logEntry.append(objects[loop]).append(EnumChar.COMMA).append(EnumChar.SPACE);
         }
 
+        final String replacement;
         if (loop >= MAX_MULTIPLES_LOG) {
-            logEntry.append(EnumChar.ELLIPSIS);
+            replacement = EnumChar.ELLIPSIS.toString();
         } else {
-            logEntry.replace(logEntry.length() - 2, logEntry.length(), "");
+            replacement = "";
         }
+        logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
         logEntry.append(EnumChar.BRACKET_RIGHT);
     }
 
@@ -255,11 +258,13 @@ public abstract class AbstractAspect {
                 loop++;
             }
         }
+        final String replacement;
         if (!iterator.hasNext()) {
-            logEntry.replace(logEntry.length() - 2, logEntry.length(), "");
+            replacement = "";
         } else {
-            logEntry.append(EnumChar.ELLIPSIS);
+            replacement = EnumChar.ELLIPSIS.toString();
         }
+        logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
         logEntry.append(EnumChar.BRACKET_RIGHT);
     }
 
@@ -280,20 +285,17 @@ public abstract class AbstractAspect {
         logEntry.append(EnumChar.PARENTHESIS_LEFT).append(objClass.getSimpleName()).append(EnumChar.PARENTHESIS_RIGHT);
 
         logEntry.append(EnumChar.BRACKET_LEFT);
+        String replacement = "";
         for (final Entry<?, ?> entry : map.entrySet()) {
             logEntry.append(entry.getKey()).append(EnumChar.EQUALS).append(entry.getValue()).append(EnumChar.COMMA).append(EnumChar.SPACE);
-            loop++;
 
-            if (loop >= MAX_MULTIPLES_LOG) {
-                logEntry.append(EnumChar.ELLIPSIS);
+            if (++loop >= MAX_MULTIPLES_LOG) {
+                replacement = EnumChar.ELLIPSIS.toString();
                 break;
             }
         }
 
-        if (loop == map.size()) {
-            logEntry.replace(logEntry.length() - 2, logEntry.length(), "");
-        }
-
+        logEntry.replace(logEntry.length() - 2, logEntry.length(), replacement);
         logEntry.append(EnumChar.BRACKET_RIGHT);
     }
 
