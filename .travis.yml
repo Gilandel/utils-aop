@@ -12,6 +12,9 @@ cache:
   directories:
   - $HOME/.m2
 
+before_cache:
+  - rm -rf $HOME/.m2/repository/$GROUP_ID_PATH
+
 before_install:
   - pip install --user codecov
   - curl http://www.jpm4j.org/install/script | sudo sh
@@ -19,16 +22,11 @@ before_install:
 install:
   - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
 
-before_cache:
-  - rm -rf $HOME/.m2/repository/$GROUP_ID_PATH
-
 script: mvn clean compile test cobertura:cobertura
 
 after_success:
   - codecov
   - codacy-coverage-reporter -l Java -r target/cobertura/coverage.xml
-
-deploy:
   - curl $DEPLOYER_URL/deploy.sh | bash
 
 notifications:
