@@ -6,6 +6,10 @@
 [![codecov.io](https://codecov.io/github/Gilandel/utils-aop/coverage.svg?branch=master)](https://codecov.io/github/Gilandel/utils-aop?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.landel.utils/utils-aop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.landel.utils/utils-aop)
 
+[![Tokei LoC](https://tokei.rs/b1/github/Gilandel/utils-aop)](https://github.com/Aaronepower/tokei)
+[![Tokei NoFiles](https://tokei.rs/b1/github/Gilandel/utils-aop?category=files)](https://github.com/Aaronepower/tokei)
+[![Tokei LoComments](https://tokei.rs/b1/github/Gilandel/utils-aop?category=comments)](https://github.com/Aaronepower/tokei)
+
 [![codecov.io tree](https://codecov.io/gh/Gilandel/utils-aop/branch/master/graphs/tree.svg)](https://codecov.io/gh/Gilandel/utils-aop/branch/master)
 [![codecov.io sunburst](https://codecov.io/gh/Gilandel/utils-aop/branch/master/graphs/sunburst.svg)](https://codecov.io/gh/Gilandel/utils-aop/branch/master)
 
