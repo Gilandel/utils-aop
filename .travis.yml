@@ -2,7 +2,7 @@ language:
   - java
 
 jdk:
-  - oraclejdk8
+  - oraclejdk9
 
 addons:
   apt:
@@ -11,37 +11,27 @@ addons:
 
 cache:
   directories:
-  # SBT
-  - $HOME/.ivy2/cache
   # Maven
   - $HOME/.m2
-  # SBT binaries
-  - $HOME/sbt
-  # Code coverage
-  - $HOME/ccr
 
 before_cache:
-  # Cleanup the cached directories to avoid unnecessary cache updates
-  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
-  - find $HOME/.sbt        -name "*.lock"               -print -delete
   # Cleanup the project repository
   - rm -rf $HOME/.m2/repository/$GROUP_ID_PATH
-
+  
 install:
   # Install Codecov
   - pip install --user codecov
-  # Install Codacity coverage reporter (install SBT + build reporter)
-  - curl $DEPLOYER_URL/codacity-coverage-reporter-install.sh | sh
+  # Install Codacity coverage reporter (install build reporter)
+  - curl $DEPLOYER_URL/codacity-coverage-reporter-install.sh | sudo bash
 
 script:
-  - mvn clean compile test cobertura:cobertura
+  - mvn clean compile test jacoco:report
 
 after_success:
   # Call Codecov
   - codecov
   # Call Codacity coverage reporter
-  - java -cp $HOME/ccr/codacy-coverage-reporter-assembly.jar com.codacy.CodacyCoverageReporter -l Java -r target/cobertura/coverage.xml
-  - curl $DEPLOYER_URL/codacity-coverage-reporter-clean.sh | sh
+  - curl $DEPLOYER_URL/codacity-coverage-reporter-runner.sh | bash -s -- -l Java -r target/site/jacoco/jacoco.xml
   # Stage artifact to Sonatype OSSRH
   - curl $DEPLOYER_URL/deploy.sh | bash
 

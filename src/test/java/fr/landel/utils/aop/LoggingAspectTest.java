@@ -2,12 +2,19 @@
  * #%L
  * utils-aop
  * %%
- * Copyright (C) 2016 - 2017 Gilandel
+ * Copyright (C) 2016 - 2017 Gilles Landel
  * %%
- * Authors: Gilles Landel
- * URL: https://github.com/Gilandel
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
- * This file is under Apache License, version 2.0 (2004).
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  * #L%
  */
 package fr.landel.utils.aop;
@@ -290,7 +297,7 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
 
         final String p1 = "p1";
         final Character p2 = 'p';
-        final Integer p3 = new Integer(3);
+        final Integer p3 = 3;
         final Boolean p4 = Boolean.TRUE;
         final EnumTest p5 = EnumTest.KEY;
 
@@ -335,7 +342,7 @@ public class LoggingAspectTest extends AbstractAspectTest<LoggingAspect> {
 
         final String p1 = "p1";
         final Character p2 = 'p';
-        final Integer p3 = new Integer(3);
+        final Integer p3 = 3;
         final Boolean p4 = Boolean.TRUE;
         final EnumTest p5 = EnumTest.KEY;
 
