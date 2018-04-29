@@ -2,7 +2,6 @@
 
 [![Build Status](https://api.travis-ci.org/Gilandel/utils-aop.svg?branch=master)](https://travis-ci.org/Gilandel/utils-aop/builds)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/778ffc15500647ce9d54b74fba878c8e)](https://www.codacy.com/app/gilles/utils-aop)
-[![Dependency Status](https://www.versioneye.com/user/projects/58b29b6f7b9e15003a17e544/badge.svg?style=flat)](https://www.versioneye.com/user/projects/58b29b6f7b9e15003a17e544)
 [![codecov.io](https://codecov.io/github/Gilandel/utils-aop/coverage.svg?branch=master)](https://codecov.io/github/Gilandel/utils-aop?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.landel.utils/utils-aop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.landel.utils/utils-aop)
 [![Javadocs](http://www.javadoc.io/badge/fr.landel.utils/utils-aop.svg)](http://www.javadoc.io/doc/fr.landel.utils/utils-aop)
