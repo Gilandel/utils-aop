@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>fr.landel</groupId>
 		<artifactId>utils</artifactId>
-		<version>1.0.4</version>
+		<version>1.0.18</version>
 	</parent>
 
 	<groupId>fr.landel.utils</groupId>
@@ -35,9 +35,9 @@
 		<gpg.home>${env.HOME}/build/Gilandel/${project.artifactId}/distribution</gpg.home>
 		
 		<!-- Dependencies version -->
-		<utils-commons.version>1.0.1</utils-commons.version>
-		<utils-io.version>1.0.0</utils-io.version>
-		<utils-microbenchmark.version>1.0.2</utils-microbenchmark.version>
+		<utils-commons.version>1.0.20</utils-commons.version>
+		<utils-io.version>1.0.5</utils-io.version>
+		<utils-microbenchmark.version>1.0.7</utils-microbenchmark.version>
 	</properties>
 	
 	<build>

@@ -1,7 +1,8 @@
-language: java
+language:
+  - java
 
 jdk:
-  - oraclejdk8
+  - oraclejdk9
 
 addons:
   apt:
@@ -10,23 +11,28 @@ addons:
 
 cache:
   directories:
+  # Maven
   - $HOME/.m2
 
 before_cache:
+  # Cleanup the project repository
   - rm -rf $HOME/.m2/repository/$GROUP_ID_PATH
-
-before_install:
-  - pip install --user codecov
-  - curl http://www.jpm4j.org/install/script | sudo sh
-
+  
 install:
-  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+  # Install Codecov
+  - pip install --user codecov
+  # Install Codacity coverage reporter (install build reporter)
+  - curl $DEPLOYER_URL/codacity-coverage-reporter-install.sh | sudo bash
 
-script: mvn clean compile test cobertura:cobertura
+script:
+  - mvn clean compile test jacoco:report
 
 after_success:
+  # Call Codecov
   - codecov
-  - codacy-coverage-reporter -l Java -r target/cobertura/coverage.xml
+  # Call Codacity coverage reporter
+  - curl $DEPLOYER_URL/codacity-coverage-reporter-runner.sh | bash -s -- -l Java -r target/site/jacoco/jacoco.xml
+  # Stage artifact to Sonatype OSSRH
   - curl $DEPLOYER_URL/deploy.sh | bash
 
 notifications:
