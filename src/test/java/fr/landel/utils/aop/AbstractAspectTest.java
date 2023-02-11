@@ -21,8 +21,8 @@ package fr.landel.utils.aop;
 
 import java.io.ByteArrayOutputStream;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
@@ -77,7 +77,7 @@ public abstract class AbstractAspectTest<A extends AbstractAspect> {
     /**
      * Init the appender
      */
-    @Before
+    @BeforeEach
     public void init() {
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
 
@@ -107,7 +107,7 @@ public abstract class AbstractAspectTest<A extends AbstractAspect> {
     /**
      * Release the appender
      */
-    @After
+    @AfterEach
     public void dispose() {
         this.appender.stop();
     }
